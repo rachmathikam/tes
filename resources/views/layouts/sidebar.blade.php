@@ -48,25 +48,33 @@
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
             aria-expanded="true" aria-controls="collapseTwo">
             <i class="fas fa-fw fa-university"></i>
-            <span>Kelas</span>
+            <span>Manajemen Sekolah</span>
         </a>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="{{ route('kelas.index') }}">Kelas</a>
-                <a class="collapse-item" href="{{ route('detailkelas.create') }}">Tambah Kelas Mapel</a>
+                <a class="collapse-item" href="{{ route('kelas.index') }}">Kelas Mapel</a>
+                <a class="collapse-item" href="{{ route('detailkelas.create') }}"> Tambah Kelas Mapel</a>
+                <a class="collapse-item" href="{{ route('kelas_siswa.index') }}"> Kelas Siswa</a>
+                <a class="collapse-item" href="{{ route('tahunpelajaran.index') }}"> Tahun Periodik</a>
             </div>
         </div>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="{{ route('nilai_harian.index') }}">
-            <i class="fas fa-fw fa-edit"></i>
-            <span>Input Nilai</span></a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="{{ route('tahunpelajaran.index') }}">
-            <i class="fas fa-fw fa-calendar-alt"></i>
-            <span>Tahun Pelajaran</span></a>
-    </li>
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
+            aria-expanded="true" aria-controls="collapsePages">
+            <i class="fas fa-fw fa-clipboard"></i>
+            <span>Penilaian</span>
+        </a>
+        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Penilaian Harian:</h6>
+                <a class="collapse-item" href="login.html">Nilai Harian</a>
+                <div class="collapse-divider"></div>
+                <h6 class="collapse-header">Penilaian Ujian:</h6>
+                <a class="collapse-item" href="404.html">Penilaian PTS</a>
+                <a class="collapse-item" href="blank.html">Penilaian PAS</a>
+            </div>
+        </div>
 </li>
 @endif
 @if(Auth::user()->role_id == '2')

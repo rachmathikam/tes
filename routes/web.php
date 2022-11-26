@@ -2,7 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{SiswaController, MapelController,
-    KelasController,TahunPelajaranController,NilaiHarianController, DetailKelasController, NilaiController};
+    KelasController,TahunPelajaranController,NilaiHarianController, DetailKelasController, NilaiController
+, KelasSiswaController};
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -31,6 +32,7 @@ Route::group(['middleware' => 'admin'], function () {
     Route::resource('/nilai_harian', NilaiHarianController::class);
     Route::resource('/detailkelas', DetailKelasController::class);
     Route::resource('/nilai', NilaiController::class);
+    Route::resource('/kelas_siswa', KelasSiswaController::class);
 
 
 });

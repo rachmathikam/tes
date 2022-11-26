@@ -40,14 +40,23 @@ class TahunPelajaranController extends Controller
     {
         $request->validate([
             'tahun_pelajarans' =>'required',
-            'semester' => 'required',
+            'is_active' =>'nullable',
         ]);
-        // dd($request);
-        $input = $request->all();
 
-        $check = TahunPelajaran::where('tahun_pelajarans',$input['tahun_pelajarans'])->where('semester',$input['semester'])->count();
+
+
+        $input = $request->all();
+        // dd($input);
+        if ($request->has('is_active')) {
+            $input['is_active'] = 'active';
+        }else{
+            $input['is_active'] = 'inactive';
+        }
+        // dd($input);
+
+        $check = TahunPelajaran::where('tahun_pelajarans',$input['tahun_pelajarans'])->count();
         if($check > 0){
-            return redirect()->route('tahunpelajaran.create')->with('error','Inisisal Tahun Pelajaran '.$input['tahun_pelajarans'].'/'.$input['semester']." ".'sudah ada.');
+            return redirect()->route('tahunpelajaran.create')->with('error','Inisisal Tahun Pelajaran '.$input['tahun_pelajarans'] .' sudah ada.');
         }
 
         $data = TahunPelajaran::create($input);

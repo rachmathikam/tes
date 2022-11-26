@@ -18,8 +18,31 @@ class TahunPelajaranSeeder extends Seeder
         TahunPelajaran::insert([
             [
                 'tahun_pelajarans' => '2016',
-                'semester' => 'ganjil',
+
             ],
+            [
+                'tahun_pelajarans' => '2017',
+
+            ],
+            [
+                'tahun_pelajarans' => '2018',
+
+            ],
+            [
+                'tahun_pelajarans' => '2019',
+
+            ],
+            [
+                'tahun_pelajarans' => '2020',
+            ],
+            [
+                'tahun_pelajarans' => '2021',
+            ],
+            [
+                'tahun_pelajarans' => '2022',
+
+            ],
+
         ]);
     }
 }

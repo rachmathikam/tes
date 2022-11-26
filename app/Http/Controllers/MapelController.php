@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Mapel;
 use App\Models\TahunPelajaran;
+use App\Models\MapelAspek;
 use Illuminate\Http\Request;
 
 class MapelController extends Controller
@@ -13,9 +14,10 @@ class MapelController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data = Mapel::all();
+        $data = Mapel::with('aspek')->get();
+
         // dd($data);
         return view('pages.mapel.index',compact('data'));
     }

@@ -12,18 +12,13 @@ class Kelas extends Model
     protected $table = 'kelas';
     protected $guarded = [];
 
-    public function romawi(){
-        return $this->belongsTo(Romawi::class);
+    public function tahun_pelajaran(){
+        return $this->belongsTo(TahunPelajaran::class, 'tahun_pelajaran_id', 'id');
     }
 
-    public function CodeKelas(){
-        return $this->belongsTo(CodeKelas::class,'code_id');
+    public function siswa()
+    {
+        return $this->belongsToMany(Siswa::class, 'kelas_siswas')->withPivot('kelas_id')->withTimestamps();
     }
-
-    public function siswa(){
-        return $this->belongsTo(Siswa::class,'id');
-    }
-
-
 
 }

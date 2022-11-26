@@ -17,8 +17,25 @@ class SiswaSeeder extends Seeder
         Siswa::insert([
             [
                 'NIS' => '1234567890',
+                'user_id'=> 2,
+                'tempat_lahir' => 'Sumenep',
+                'tanggal_lahir' => '2001-07-17',
+                'alamat' => 'JL.Guntur',
+                'jenis_kelamin' => 'laki-laki',
+                'image' => 'storage/image/hero.jpg',
+            ],
+            [
+                'NIS' => '1234567890',
                 'user_id'=> 3,
-                'kelas_id' => 1,
+                'tempat_lahir' => 'Sumenep',
+                'tanggal_lahir' => '2001-07-17',
+                'alamat' => 'JL.Guntur',
+                'jenis_kelamin' => 'laki-laki',
+                'image' => 'storage/image/hero.jpg',
+            ],
+            [
+                'NIS' => '1234567890',
+                'user_id'=> 4,
                 'tempat_lahir' => 'Sumenep',
                 'tanggal_lahir' => '2001-07-17',
                 'alamat' => 'JL.Guntur',

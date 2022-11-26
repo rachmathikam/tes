@@ -13,10 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('tahun_pelajarans', function (Blueprint $table) {
+        Schema::create('kelas', function (Blueprint $table) {
             $table->id();
-            $table->string('tahun_pelajarans');
-            $table->enum('is_active',['active','inactive'])->nullable();
+            $table->ForeignId('tahun_pelajaran_id')->nullable()->references('id')->on('tahun_pelajarans')->onDelete('cascade');
+            $table->string('nama_kelas');
+            $table->enum('kode_kelas',['A','B','C','D']);
             $table->timestamps();
         });
     }
@@ -28,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tahun_pelajarans');
+        Schema::dropIfExists('kelas');
     }
 };

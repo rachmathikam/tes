@@ -13,11 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('nilais', function (Blueprint $table) {
+        Schema::create('aspeks', function (Blueprint $table) {
             $table->id();
-            $table->string('nilai_harians_id');
-            $table->string('nilai_uts');
-            $table->string('nilai_uas');
+            $table->enum('aspek',['pengetahuan','keterampilan','bacaan','hafalan']);
             $table->timestamps();
         });
     }
@@ -29,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('nilais');
+        Schema::dropIfExists('aspeks');
     }
 };

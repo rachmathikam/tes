@@ -13,10 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('tahun_pelajarans', function (Blueprint $table) {
+        Schema::create('nilai_p_t_s', function (Blueprint $table) {
             $table->id();
-            $table->string('tahun_pelajarans');
-            $table->enum('is_active',['active','inactive'])->nullable();
             $table->timestamps();
         });
     }
@@ -28,6 +26,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tahun_pelajarans');
+        Schema::dropIfExists('nilai_p_t_s');
     }
 };

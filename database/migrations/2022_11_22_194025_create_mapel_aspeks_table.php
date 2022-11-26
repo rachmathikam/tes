@@ -13,10 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('tahun_pelajarans', function (Blueprint $table) {
+        Schema::create('mapel_aspeks', function (Blueprint $table) {
             $table->id();
-            $table->string('tahun_pelajarans');
-            $table->enum('is_active',['active','inactive'])->nullable();
+            $table->unsignedBigInteger('mapel_id');
+            $table->unsignedBigInteger('aspek_id');
+            $table->foreign('mapel_id')->references('id')->on('mapels')
+            ->onDelete('restrict');
+            $table->foreign('aspek_id')->references('id')->on('aspeks')
+            ->onDelete('restrict');
             $table->timestamps();
         });
     }
@@ -28,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tahun_pelajarans');
+        Schema::dropIfExists('mapel_aspeks');
     }
 };

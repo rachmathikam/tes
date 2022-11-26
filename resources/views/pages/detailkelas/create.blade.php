@@ -22,7 +22,7 @@
                   <td><select class="custom-select my-1 mr-sm-2 product_price" id="inlineFormCustomSelectPref" data-type="product_price"  name='kelas_id[]' for="1">
                     <option selected>Choose...</option>
                     @foreach ($data as $datas )
-                    <option value="{{ $datas->id }}" @selected( $datas->id)>{{ $datas->romawi }} - {{$datas->code_kelas  }}</option>
+                    <option value="{{ $datas->id }}" @selected( $datas->id)>{{ $datas->nama_kelas }} - {{$datas->kode_kelas  }}</option>
                     @endforeach
                   </select></td> <!-- purchase_cost -->
                   <td><select class="custom-select my-1 mr-sm-2 quantity " id="inlineFormCustomSelectPref" name='mapel_id[]' for="1">
@@ -50,7 +50,7 @@
 
 $('#add').click(function() {
     rowCount++;
-    $('#orders').append('<tr id="row'+rowCount+'"><td><select class="custom-select my-1 mr-sm-2 product_price" id="inlineFormCustomSelectPref" data-type="product_price"  name="kelas_id[]" for="1"><option selected>Choose...</option>@foreach($data as $datas)<option value="{{ $datas->id }}" @selected($datas->id)>{{ $datas->romawi }} - {{ $datas->code_kelas }}</option>@endforeach</select></td><td><select class="custom-select my-1 mr-sm-2 quantity" id="inlineFormCustomSelectPref" name="mapel_id[]" for="1"><option selected>Choose...</option>@foreach($mapel as $mapels)<option value="{{ $mapels->id }}" @selected($mapels->id)>{{ $mapels->mata_pelajaran }}</option>@endforeach</select></td><td><button type="button" name="remove" id="'+rowCount+'" class="btn btn-danger btn_remove cicle">-</button></td></tr>');
+    $('#orders').append('<tr id="row'+rowCount+'"><td><select class="custom-select my-1 mr-sm-2 product_price" id="inlineFormCustomSelectPref" data-type="product_price"  name="kelas_id[]" for="1"><option selected>Choose...</option>@foreach($data as $datas)<option value="{{ $datas->id }}" @selected($datas->id)>{{ $datas->nama_kelas }} - {{ $datas->kode_kelas }}</option>@endforeach</select></td><td><select class="custom-select my-1 mr-sm-2 quantity" id="inlineFormCustomSelectPref" name="mapel_id[]" for="1"><option selected>Choose...</option>@foreach($mapel as $mapels)<option value="{{ $mapels->id }}" @selected($mapels->id)>{{ $mapels->mata_pelajaran }}</option>@endforeach</select></td><td><button type="button" name="remove" id="'+rowCount+'" class="btn btn-danger btn_remove cicle">-</button></td></tr>');
 });
 
 // Add a generic event listener for any change on quantity or price classed inputs

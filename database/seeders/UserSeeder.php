@@ -24,11 +24,15 @@ class UserSeeder extends Seeder
             ['name' => 'Rachmat Hikam',
             'email' => 'hikam@gmail.com',
             'password' => bcrypt('hikam123'),
-            'role_id' => 2],
+            'role_id' => 3],
 
             ['name' => 'Arya sultan',
             'email' => 'arya@gmail.com',
             'password' => bcrypt('arya123'),
+            'role_id' => 3],
+            ['name' => 'Aura Ayu',
+            'email' => 'aura@gmail.com',
+            'password' => bcrypt('aura123'),
             'role_id' => 3],
         ]);
     }

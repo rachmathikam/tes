@@ -13,13 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('siswa_mapel', function (Blueprint $table) {
+        Schema::create('kelas_siswas', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('kelas_id');
             $table->unsignedBigInteger('siswa_id');
-            $table->unsignedBigInteger('mapels_id');
+            $table->foreign('kelas_id')->references('id')->on('kelas')
+            ->onDelete('cascade');
             $table->foreign('siswa_id')->references('id')->on('siswas')
-            ->onDelete('restrict');
-            $table->foreign('mapels_id')->references('id')->on('mapels')
-            ->onDelete('restrict');
+            ->onDelete('cascade');
+            $table->timestamps();
         });
     }
 
@@ -30,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('siswa_mapel');
+        Schema::dropIfExists('kelas_siswas');
     }
 };

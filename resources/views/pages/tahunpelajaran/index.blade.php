@@ -15,7 +15,7 @@
                     <tr class="text-center">
                         <th>NO</th>
                         <th>Tahun Pelajaran</th>
-                        <th>Semester</th>
+                        <th>Active</th>
                         {{-- <th>Status</th> --}}
                         @if(Auth::user()->role_id == '1')
                         <th class="text-center">Action</th>
@@ -26,7 +26,7 @@
                     <tr class="text-center">
                         <th>NO</th>
                         <th>Tahun Pelajaran</th>
-                        <th>Semester</th>
+                        <th>Active</th>
                         {{-- <th>Status</th> --}}
                          @if(Auth::user()->role_id == '1')
                         <th class="text-center">Action</th>
@@ -38,7 +38,7 @@
                     <tr class="text-center">
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $datas->tahun_pelajarans }}</td>
-                        <td>{{ $datas->semester }}</td>
+                        <td>{{ $datas->is_active }}</td>
                         {{-- <td class="text-center">
                             <div class="custom-control custom-switch">
                                 <input type="checkbox" class="custom-control-input" id="customSwitch1" data-id="{{$mapels->id}}"

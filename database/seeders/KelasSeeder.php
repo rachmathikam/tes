@@ -15,9 +15,58 @@ class KelasSeeder extends Seeder
     public function run()
     {
         Kelas::insert([
-            // 'mapel_id' => 1,
-            'romawi'=> 'I',
-            'code_kelas'=> 'A',
+            [
+                'nama_kelas' => 'VII',
+                'kode_kelas' => 'A',
+
+            ],
+            [
+                'nama_kelas' => 'VII',
+                'kode_kelas' => 'B',
+            ],
+            [
+                'nama_kelas' => 'VII',
+                'kode_kelas' => 'C',
+            ],
+            [
+                'nama_kelas' => 'VII',
+                'kode_kelas' => 'D',
+            ],
+            [
+                'nama_kelas' => 'VIII',
+                'kode_kelas' => 'A',
+            ],
+            [
+                'nama_kelas' => 'VIII',
+                'kode_kelas' => 'B',
+            ],
+            [
+                'nama_kelas' => 'VIII',
+                'kode_kelas' => 'C',
+            ],
+            [
+                'nama_kelas' => 'VIII',
+                'kode_kelas' => 'D',
+            ],
+            [
+                'nama_kelas' => 'IX',
+                'kode_kelas' => 'A',
+            ],
+            [
+                'nama_kelas' => 'IX',
+                'kode_kelas' => 'B',
+            ],
+            [
+                'nama_kelas' => 'IX',
+                'kode_kelas' => 'C',
+            ],
+            [
+                'nama_kelas' => 'IX',
+                'kode_kelas' => 'D',
+            ]
+
+
+
         ]);
     }
 }

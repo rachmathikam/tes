@@ -16,8 +16,7 @@ class KelasController extends Controller
      */
     public function index()
     {
-        $kelas = Kelas::with('siswa')->get();
-        // dd($kelas->toArray());
+        $kelas = Kelas::all();
         return view('pages.kelas.index',compact('kelas'));
     }
 

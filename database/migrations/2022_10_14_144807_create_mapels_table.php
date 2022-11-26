@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('mapels', function (Blueprint $table) {
             $table->id();
             $table->string('mata_pelajaran');
-            $table->boolean('status')->default(false);
+            $table->enum('keterangan',['A','B'])->nullable();
             $table->timestamps();
         });
     }

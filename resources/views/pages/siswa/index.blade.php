@@ -1,3 +1,6 @@
+@section('css')
+<link href="{{ asset('admin/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
+@endsection
 @extends('layouts.app')
     <!-- Page Heading -->
 @section('content')
@@ -16,7 +19,6 @@
                         <th>Name</th>
                         <th>Alamat</th>
                         <th>Jenis Kelamin</th>
-                        <th>Status</th>
                         <th class="text-center">Action</th>
                     </tr>
                 </thead>
@@ -27,7 +29,6 @@
                         <th>Name</th>
                         <th>Alamat</th>
                         <th>Jenis Kelamin</th>
-                        <th>Status</th>
                         <th class="text-center">Action</th>
                     </tr>
                 </tfoot>
@@ -39,13 +40,6 @@
                         <td>{{ $siswas->user->name }}</td>
                         <td>{{ $siswas->alamat }}</td>
                         <td>{{ $siswas->jenis_kelamin }}</td>
-                        <td class="text-center">
-                            <div class="custom-control custom-switch">
-                                <input type="checkbox" class="custom-control-input" id="customSwitch1" data-id="{{$siswas->id}}"
-                                data-toggle="toggle" data-on="Active" data-off="InActive" {{ $siswas->status ? 'checked' : '' }}>
-                                <label class="custom-control-label" for="customSwitch1"></label>
-                              </div>
-                        </td>
                         <td class="text-center">
 
                             <form onsubmit="return confirm('Apakah Anda Yakin ?');"
@@ -67,6 +61,14 @@
     </div>
 </div>
 @endsection
+@section('js')
 
+<!-- Page level plugins -->
+<script src="{{ asset('admin/vendor/datatables/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('admin/vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
+
+<!-- Page level custom scripts -->
+<script src="{{ asset('admin/js/demo/datatables-demo.js') }}"></script>
+@endsection
     <!-- DataTales Example -->
 

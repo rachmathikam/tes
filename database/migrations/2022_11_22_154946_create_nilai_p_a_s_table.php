@@ -13,11 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('kelas', function (Blueprint $table) {
+        Schema::create('nilai_p_a_s', function (Blueprint $table) {
             $table->id();
-            // $table->ForeignId('mapel_id')->references('id')->on('mapels')->onDelete('cascade');
-            $table->string('romawi');
-            $table->enum('code_kelas',['A','B','C','D']);
+            $table->string('nilai_harian_rata2')->nullable();
+            $table->string('UTS')->nullable();
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('kelas');
+        Schema::dropIfExists('nilai_p_a_s');
     }
 };

@@ -12,7 +12,10 @@ class Mapel extends Model
     protected $table = 'mapels';
     protected $guarded = [];
 
-
+    public function aspek()
+    {
+        return $this->belongsToMany(Aspek::class,'mapel_aspeks', 'mapel_id', 'aspek_id');
+    }
 
 
 }

@@ -1,3 +1,6 @@
+@section('css')
+<link href="{{ asset('admin/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
+@endsection
 @extends('layouts.app')
     <!-- Page Heading -->
 @section('content')
@@ -35,7 +38,7 @@
                     @foreach ($kelas as $kelass)
                     <tr class="text-center">
                         <td>{{ $loop->iteration }}</td>
-                        <td>{{ $kelass->romawi }} - {{ $kelass->code_kelas}}</td>
+                        <td>{{ $kelass->nama_kelas }} - {{ $kelass->kode_kelas}}</td>
 
 
                         @if(Auth::user()->role_id == '1')
@@ -63,4 +66,12 @@
 @endsection
 
     <!-- DataTales Example -->
+@section('js')
 
+<!-- Page level plugins -->
+<script src="{{ asset('admin/vendor/datatables/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('admin/vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
+
+<!-- Page level custom scripts -->
+<script src="{{ asset('admin/js/demo/datatables-demo.js') }}"></script>
+@endsection

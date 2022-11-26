@@ -17,8 +17,9 @@ class Siswa extends Model
         return $this->belongsTo(User::class,'user_id');
     }
 
-    public function kelas(){
-        return $this->hasOne(Kelas::class,'id');
+    public function kelas()
+    {
+        return $this->belongsToMany(Kelas::class, 'kelas_siswas')->withPivot('siswa_id')->withTimestamps();
     }
 
 }

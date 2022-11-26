@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\NilaiHarian;
+use App\Models\Aspek;
 use Illuminate\Http\Request;
 
-class NilaiHarianController extends Controller
+class AspekController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class NilaiHarianController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\NilaiHarian  $nilaiHarian
+     * @param  \App\Models\Aspek  $aspek
      * @return \Illuminate\Http\Response
      */
-    public function show(NilaiHarian $nilaiHarian)
+    public function show(Aspek $aspek)
     {
         //
     }
@@ -52,10 +52,10 @@ class NilaiHarianController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\NilaiHarian  $nilaiHarian
+     * @param  \App\Models\Aspek  $aspek
      * @return \Illuminate\Http\Response
      */
-    public function edit(NilaiHarian $nilaiHarian)
+    public function edit(Aspek $aspek)
     {
         //
     }
@@ -64,10 +64,10 @@ class NilaiHarianController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\NilaiHarian  $nilaiHarian
+     * @param  \App\Models\Aspek  $aspek
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, NilaiHarian $nilaiHarian)
+    public function update(Request $request, Aspek $aspek)
     {
         //
     }
@@ -75,10 +75,10 @@ class NilaiHarianController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\NilaiHarian  $nilaiHarian
+     * @param  \App\Models\Aspek  $aspek
      * @return \Illuminate\Http\Response
      */
-    public function destroy(NilaiHarian $nilaiHarian)
+    public function destroy(Aspek $aspek)
     {
         //
     }
