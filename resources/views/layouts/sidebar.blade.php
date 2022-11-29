@@ -67,11 +67,9 @@
         </a>
         <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Penilaian Harian:</h6>
-                <a class="collapse-item" href="login.html">Nilai Harian</a>
                 <div class="collapse-divider"></div>
                 <h6 class="collapse-header">Penilaian Ujian:</h6>
-                <a class="collapse-item" href="404.html">Penilaian PTS</a>
+                <a class="collapse-item" href="{{ route('nilai_siswa.index') }}">Penilaian PTS</a>
                 <a class="collapse-item" href="blank.html">Penilaian PAS</a>
             </div>
         </div>

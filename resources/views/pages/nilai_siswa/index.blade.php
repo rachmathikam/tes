@@ -62,7 +62,7 @@
                               </div>
                         </td> --}}
                                     <td class="text-center">
-                                        <a href="{{ route('kelas_siswa.show', $datas->id) }}">
+                                        <a href="{{ route('nilai_siswa.show', $datas->id) }}">
                                             <btn class="btn btn-xs btn-primary "><i class="fas fa-clipboard fa-sm"></i>
                                             </btn>
                                         </a>

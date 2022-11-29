@@ -16,6 +16,9 @@ class Mapel extends Model
     {
         return $this->belongsToMany(Aspek::class,'mapel_aspeks', 'mapel_id', 'aspek_id');
     }
-
+    public function nilai_harian()
+    {
+        return $this->belongsTo(NilaiHarian::class, 'nilai_harian_id', 'id');
+    }
 
 }

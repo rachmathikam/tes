@@ -20,27 +20,27 @@
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Tambah Kelas Siswa</h5>
+                  <h5 class="modal-title" id="exampleModalLabel">Tambah Kelas Siswa {{ $tahun->tahun_pelajarans }}</h5>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
                 <div class="modal-body">
                     <div class="col-md-12">
-                        <form action="{{ route('detailkelas.store') }}" method="POST">
+                        <form action="{{ route('kelas_siswa.store') }}" method="POST">
                             @csrf
                             @method('POST')
                         <div class="row">
                           <table class="table table-bordered" id="orders">
                             <tr>
                               <th>Tambah Siswa</th>
-                              <th>Tambah</th>
                             </tr>
                             <tr>
-                              <td><select class="custom-select my-1 mr-sm-2 product_price" id="inlineFormCustomSelectPref" data-type="product_price"  name='kelas_id[]' for="1">
+                                <input type="hidden" class="form-control" name="kelas_id" value="{{ $data->id }}">
+                              <td><select class="custom-select product_price" id="inlineFormCustomSelectPref" data-type="product_price"  name='siswa[]' for="1">
                                 <option selected>Choose...</option>
-                                @foreach ($data as $datas )
-                                <option value="{{ $datas->id }}" @selected( $datas->id)>{{ $datas->nama_kelas }} - {{$datas->kode_kelas  }}</option>
+                                @foreach ($siswas as $datas )
+                                <option value="{{ $datas->id }}" @selected( $datas->id)>{{ $datas->user->name }}</option>
                                 @endforeach
                               </select></td> <!-- purchase_cost -->
                               <td><button type="button" name="add" id="add" class="btn btn-success circle">+</button></td>
@@ -50,8 +50,9 @@
                       </div>
                 </div>
                 <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </form>
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-primary">Save changes</button>
                 </div>
               </div>
             </div>
@@ -107,7 +108,7 @@ var rowCount = 0;
 
 $('#add').click(function() {
     rowCount++;
-    $('#orders').append('<tr id="row'+rowCount+'"><td><select class="custom-select my-1 mr-sm-2 product_price" id="inlineFormCustomSelectPref" data-type="product_price"  name="kelas_id[]" for="1"><option selected>Choose...</option>@foreach($data as $datas)<option value="{{ $datas->id }}" @selected($datas->id)>{{ $datas->nama_kelas }} - {{ $datas->kode_kelas }}</option>@endforeach</select></td><td><button type="button" name="remove" id="'+rowCount+'" class="btn btn-danger btn_remove cicle">-</button></td></tr>');
+    $('#orders').append('<tr id="row'+rowCount+'"><input type="text" class="form-control" name="kelas_id" hidden value="{{ $data->id }}"><td><select class="custom-select my-1 mr-sm-2 product_price" id="inlineFormCustomSelectPref" data-type="product_price"  name="siswa[]" for="1"><option selected>Choose...</option>@foreach($siswas as $datas)<option value="{{ $datas->id }}" @selected($datas->id)>{{ $datas->user->name }}</option>@endforeach</select></td><td><button type="button" name="remove" id="'+rowCount+'" class="btn btn-danger btn_remove cicle">-</button></td></tr>');
 });
 
 // Add a generic event listener for any change on quantity or price classed inputs

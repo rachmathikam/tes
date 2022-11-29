@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{SiswaController, MapelController,
     KelasController,TahunPelajaranController,NilaiHarianController, DetailKelasController, NilaiController
-, KelasSiswaController};
+, KelasSiswaController, NilaiPTSController, NilaiSiswaController};
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -33,6 +33,8 @@ Route::group(['middleware' => 'admin'], function () {
     Route::resource('/detailkelas', DetailKelasController::class);
     Route::resource('/nilai', NilaiController::class);
     Route::resource('/kelas_siswa', KelasSiswaController::class);
+    Route::resource('/nilai_pts', NilaiPTSController::class);
+    Route::resource('/nilai_siswa', NilaiSiswaController::class);
 
 
 });

@@ -18,10 +18,10 @@ class DatabaseSeeder extends Seeder
         RoleSeeder::class,
         UserSeeder::class,
         MapelSeeder::class,
+        TahunPelajaranSeeder::class,
         KelasSeeder::class,
         SiswaSeeder::class,
         // GuruSeeder::class,
-        TahunPelajaranSeeder::class,
-       ]);
+    ]);
     }
 }

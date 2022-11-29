@@ -8,4 +8,22 @@ use Illuminate\Database\Eloquent\Model;
 class NilaiHarian extends Model
 {
     use HasFactory;
+    protected $table = "nilai_harians";
+    protected $guarded = [];
+
+    public function nilai_pts()
+    {
+        return $this->belongsTo(NilaiPTS::class,'id');
+    }
+
+    public function mapel()
+    {
+        return $this->belongsTo(Mapel::class, 'mapels_id','id');
+    }
+
+    public function kelas_siswa()
+    {
+        return $this->belongsTo(KelasSiswa::class,'kelas_siswa_id','id');
+    }
+
 }

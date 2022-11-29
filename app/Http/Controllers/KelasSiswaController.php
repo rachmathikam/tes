@@ -49,7 +49,53 @@ class KelasSiswaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+            // dd($request->all());
+            $request->validate([
+                    'siswa' =>'required',
+                    'kelas_id' =>'required',
+            ]);
+            // dd($request->all());
+
+            $input = $request->all();
+            $check = KelasSiswa::where('kelas_id',$input['kelas_id'])->where('siswa_id',$input['siswa'])->count();
+
+            if($check > 0){
+                return redirect()->route('kelas_siswa.show',$input['kelas_id'])->with('error',' Siswa sudah ada.');
+            }
+
+            for($i = 0; $i < count($input['siswa']); $i++){
+                if (count($input['siswa']) > 1) {
+                    if (count($input['siswa']) - 1 == $i) {
+                        if ($input['siswa'][$i] != $input['siswa'][$i-1]) {
+                            KelasSiswa::create([
+                                'kelas_id' => $input['kelas_id'],
+                                'siswa_id' => $input['siswa'][$i],
+                            ]);
+                        }else{
+                            return redirect()->route('kelas_siswa.show',$input['kelas_id'])->with('error',' Siswa sudah ada.');
+                        }
+                    }else{
+                        if ($input['siswa'][$i] != $input['siswa'][$i+1]) {
+                            KelasSiswa::create([
+                                'kelas_id' => $input['kelas_id'],
+                                'siswa_id' => $input['siswa'][$i],
+                            ]);
+                        }else{
+                            return redirect()->route('kelas_siswa.show',$input['kelas_id'])->with('error',' Siswa sudah ada.');
+                        }
+                    }
+                }else{
+                    KelasSiswa::create([
+                        'kelas_id' => $input['kelas_id'],
+                        'siswa_id' => $input['siswa'][$i],
+                    ]);
+                }
+            }
+
+
+            return redirect()->route('kelas_siswa.show',$request['kelas_id'])->with('success','siswa berhasil di tambahkan');
+            // $data = KelasSiswa::create($input);
+
     }
 
     /**
@@ -60,17 +106,17 @@ class KelasSiswaController extends Controller
      */
     public function show($id)
     {
-        $siswa = Siswa::all();
-        $data = kelas::with('siswa')->where('id',$id)->get();
+        $tahun = TahunPelajaran::first();
+        // dd($tahun);
+        $siswas = Siswa::all();
+        $data = kelas::with('siswa')->where('id',$id)->first();
         // dd($data);
         $siswa = [];
-        foreach ($data as $kelas) {
-            foreach ($kelas->siswa as $item) {
-                array_push($siswa, $item);
-            }
+        foreach ($data->siswa as $item) {
+            array_push($siswa, $item);
         }
         // dd($siswa);
-        return view('pages.kelas_siswa.show', compact('data','siswa'));
+        return view('pages.kelas_siswa.show', compact('tahun','data','siswa','siswas'));
     }
 
     /**

@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('nilai_p_t_s', function (Blueprint $table) {
+        Schema::create('nilai_siswas', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
         });
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('nilai_p_t_s');
+        Schema::dropIfExists('nilai_siswas');
     }
 };

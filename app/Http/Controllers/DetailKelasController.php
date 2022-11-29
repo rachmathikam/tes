@@ -45,7 +45,7 @@ class DetailKelasController extends Controller
 
         $request->validate([
             "kelas_id" => 'required',
-            "mapel_id" => 'required|unique:kelas_mapel,mapels_id',
+            "mapel_id" => 'required',
             // |unique:kelas_mapel,mapels_id
 
         ],

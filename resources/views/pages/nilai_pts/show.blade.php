@@ -6,13 +6,13 @@
 @section('content')
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Pilih Kelas</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Nilai {{ $siswa->user->name }} / Tahun Pelajaran / {{ $tahun->tahun_pelajarans }}</h6>
         </div>
         <div class="card-body">
             <div class="row mb-5">
                 <div class="col-md-6">
 
-                    <form action="{{ route('kelas_siswa.index') }}" method="GET">
+                    {{-- <form action="{{ route('kelas_siswa.index') }}" method="GET">
                         <label for="status_payment">Filter By Tahun Pelajaran : </label>
                         <select name="keyword" id="status_payment" class="form-control mt-1">
                             <option value="{{ $keyword }}">-- Pilih Tahun Pelajaran --</option>
@@ -25,7 +25,7 @@
                     <button class="btn btn-primary" style="margin-top:35px;" type="submit"><i
                             class="fas fa-fw fa-search"></i></button></a>
                 </div>
-                </form>
+                </form> --}}
 
             </div>
             <div class="table-responsive">
@@ -34,7 +34,9 @@
                         <tr class="text-center">
                             <th>NO</th>
                             <th>Tahun Pelajaran</th>
-                            <th>Kelas</th>
+                            <th>Nilai Harian</th>
+                            <th>Nilai UTS</th>
+                            <th>Pesan Guru</th>
                             {{-- <th>Status</th> --}}
                                 <th class="text-center">Action</th>
                         </tr>
@@ -42,18 +44,23 @@
                     <tfoot>
                         <tr class="text-center">
                             <th>NO</th>
-                            <th>Tahun Pelajaran</th>
-                            <th>Kelas</th>
+                            <th>Mata Pelajaran</th>
+                            <th>Nilai Harian</th>
+                            <th>Nilai UTS</th>
+                            <th>Pesan Guru</th>
+
                             {{-- <th>Status</th> --}}
                                 <th class="text-center">Action</th>
                         </tr>
                     </tfoot>
                     <tbody>
-                        @foreach ($kelas as $datas)
+                        @foreach ($data as $datas)
                             <tr class="text-center">
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $datas->tahun_pelajaran->tahun_pelajarans }} </td>
-                                <td>{{ $datas->nama_kelas }} - {{ $datas->kode_kelas }}</td>
+                                <td>{{ $datas->nilai_harian->mapel->mata_pelajaran }} </td>
+                                <td>{{ $datas->nilai_harian->nilai_rata2 }}</td>
+                                <td>{{ $datas->nilai_pts }}</td>
+                                <td>{{ $datas->pensan_guru }}</td>
                                 {{-- <td class="text-center">
                             <div class="custom-control custom-switch">
                                 <input type="checkbox" class="custom-control-input" id="customSwitch1" data-id="{{$mapels->id}}"
@@ -62,8 +69,8 @@
                               </div>
                         </td> --}}
                                     <td class="text-center">
-                                        <a href="{{ route('kelas_siswa.show', $datas->id) }}">
-                                            <btn class="btn btn-xs btn-primary "><i class="fas fa-clipboard fa-sm"></i>
+                                        <a href="{{ route('nilai_pts.edit', $datas->id) }}">
+                                            <btn class="btn btn-xs btn-warning "><i class="fas fa-edit fa-sm"></i>
                                             </btn>
                                         </a>
                                     </td>

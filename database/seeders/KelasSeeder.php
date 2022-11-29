@@ -18,51 +18,146 @@ class KelasSeeder extends Seeder
             [
                 'nama_kelas' => 'VII',
                 'kode_kelas' => 'A',
+                'tahun_pelajaran_id' => '1'
 
             ],
             [
                 'nama_kelas' => 'VII',
                 'kode_kelas' => 'B',
+                'tahun_pelajaran_id' => '1'
+
             ],
             [
                 'nama_kelas' => 'VII',
                 'kode_kelas' => 'C',
+                'tahun_pelajaran_id' => '1'
+
             ],
             [
                 'nama_kelas' => 'VII',
                 'kode_kelas' => 'D',
+                'tahun_pelajaran_id' => '1'
+
             ],
             [
                 'nama_kelas' => 'VIII',
                 'kode_kelas' => 'A',
+                'tahun_pelajaran_id' => '1'
+
             ],
             [
                 'nama_kelas' => 'VIII',
                 'kode_kelas' => 'B',
+                'tahun_pelajaran_id' => '1'
+
             ],
             [
                 'nama_kelas' => 'VIII',
                 'kode_kelas' => 'C',
+                'tahun_pelajaran_id' => '1'
+
             ],
             [
                 'nama_kelas' => 'VIII',
                 'kode_kelas' => 'D',
+                'tahun_pelajaran_id' => '1'
+
             ],
             [
                 'nama_kelas' => 'IX',
                 'kode_kelas' => 'A',
+                'tahun_pelajaran_id' => '1'
+
             ],
             [
                 'nama_kelas' => 'IX',
                 'kode_kelas' => 'B',
+                'tahun_pelajaran_id' => '1'
+
             ],
             [
                 'nama_kelas' => 'IX',
                 'kode_kelas' => 'C',
+                'tahun_pelajaran_id' => '1'
+
             ],
             [
                 'nama_kelas' => 'IX',
                 'kode_kelas' => 'D',
+                'tahun_pelajaran_id' => '1'
+            ],
+
+            [
+                'nama_kelas' => 'VII',
+                'kode_kelas' => 'A',
+                'tahun_pelajaran_id' => '2'
+
+            ],
+            [
+                'nama_kelas' => 'VII',
+                'kode_kelas' => 'B',
+                'tahun_pelajaran_id' => '2'
+
+            ],
+            [
+                'nama_kelas' => 'VII',
+                'kode_kelas' => 'C',
+                'tahun_pelajaran_id' => '2'
+
+            ],
+            [
+                'nama_kelas' => 'VII',
+                'kode_kelas' => 'D',
+                'tahun_pelajaran_id' => '2'
+
+            ],
+            [
+                'nama_kelas' => 'VIII',
+                'kode_kelas' => 'A',
+                'tahun_pelajaran_id' => '2'
+
+            ],
+            [
+                'nama_kelas' => 'VIII',
+                'kode_kelas' => 'B',
+                'tahun_pelajaran_id' => '2'
+
+            ],
+            [
+                'nama_kelas' => 'VIII',
+                'kode_kelas' => 'C',
+                'tahun_pelajaran_id' => '2'
+
+            ],
+            [
+                'nama_kelas' => 'VIII',
+                'kode_kelas' => 'D',
+                'tahun_pelajaran_id' => '2'
+
+            ],
+            [
+                'nama_kelas' => 'IX',
+                'kode_kelas' => 'A',
+                'tahun_pelajaran_id' => '2'
+
+            ],
+            [
+                'nama_kelas' => 'IX',
+                'kode_kelas' => 'B',
+                'tahun_pelajaran_id' => '2'
+
+            ],
+            [
+                'nama_kelas' => 'IX',
+                'kode_kelas' => 'C',
+                'tahun_pelajaran_id' => '2'
+
+            ],
+            [
+                'nama_kelas' => 'IX',
+                'kode_kelas' => 'D',
+                'tahun_pelajaran_id' => '2'
+
             ]
 
 
