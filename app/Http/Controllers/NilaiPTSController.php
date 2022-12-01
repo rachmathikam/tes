@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\NilaiPTS;
 use App\Models\NilaiHarian;
 use App\Models\Kelas;
+use App\Models\KelasSiswa;
 use App\Models\Siswa;
 use App\Models\TahunPelajaran;
 use Illuminate\Http\Request;
@@ -28,7 +29,7 @@ class NilaiPTSController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -39,7 +40,7 @@ class NilaiPTSController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
     }
 
     /**
@@ -50,14 +51,19 @@ class NilaiPTSController extends Controller
      */
     public function show($id)
     {
-        $data = NilaiPTS::where('nilai_harian_id',$id)->with('nilai_harian')->get();
-        // dd($data);
-        $tahun = TahunPelajaran::where('id',$id)->first();
-        $siswa = Siswa::where('id',$id)->first();
+        $data = explode(':', $id);
+
+        $kelas = KelasSiswa::where('kelas_id',$data[0])->where('siswa_id', $data[1])->first();
+        // dd($kelas);
+        $data = NilaiHarian::where('kelas_siswa_id', $kelas->id)->get();
+
+        // dd($tahun);
+        $siswa = Siswa::where('id',$kelas->siswa_id)->first();
+        $kelas = Kelas::where('id',$kelas->kelas_id)->first();
 
     // dd($data);
         // dd($data->toArray());
-        return view('pages.nilai_pts.show',compact('data','siswa','tahun'));
+        return view('pages.nilai_pts.show',compact('data','siswa','kelas'));
     }
 
     /**

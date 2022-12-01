@@ -6,7 +6,7 @@
 @section('content')
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Nilai {{ $siswa->user->name }} / Tahun Pelajaran / {{ $tahun->tahun_pelajarans }}</h6>
+            <h6 class="m-0 font-weight-bold text-primary">{{ $kelas->tahun_pelajaran->tahun_pelajarans }} / {{ $kelas->nama_kelas }}-{{ $kelas->kode_kelas }} {{ $siswa->user->name }} </h6>
         </div>
         <div class="card-body">
             <div class="row mb-5">
@@ -36,6 +36,7 @@
                             <th>Tahun Pelajaran</th>
                             <th>Nilai Harian</th>
                             <th>Nilai UTS</th>
+                            <th>Aspek</th>
                             <th>Pesan Guru</th>
                             {{-- <th>Status</th> --}}
                                 <th class="text-center">Action</th>
@@ -47,6 +48,7 @@
                             <th>Mata Pelajaran</th>
                             <th>Nilai Harian</th>
                             <th>Nilai UTS</th>
+                            <th>Aspek</th>
                             <th>Pesan Guru</th>
 
                             {{-- <th>Status</th> --}}
@@ -57,10 +59,11 @@
                         @foreach ($data as $datas)
                             <tr class="text-center">
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $datas->nilai_harian->mapel->mata_pelajaran }} </td>
-                                <td>{{ $datas->nilai_harian->nilai_rata2 }}</td>
-                                <td>{{ $datas->nilai_pts }}</td>
-                                <td>{{ $datas->pensan_guru }}</td>
+                                <td>{{ $datas->mapel->mata_pelajaran }} </td>
+                                <td>{{ $datas->nilai_rata2 }}</td>
+                                <td>{{ $datas->nilai_pts->nilai_pts }}</td>
+                                <td>{{ $datas->aspek }}</td>
+                                <td>{{ $datas->nilai_pts->pensan_guru }}</td>
                                 {{-- <td class="text-center">
                             <div class="custom-control custom-switch">
                                 <input type="checkbox" class="custom-control-input" id="customSwitch1" data-id="{{$mapels->id}}"

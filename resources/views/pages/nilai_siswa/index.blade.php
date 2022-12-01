@@ -12,7 +12,7 @@
             <div class="row mb-5">
                 <div class="col-md-6">
 
-                    <form action="{{ route('kelas_siswa.index') }}" method="GET">
+                    <form action="{{ route('nilai_siswa.index') }}" method="GET">
                         <label for="status_payment">Filter By Tahun Pelajaran : </label>
                         <select name="keyword" id="status_payment" class="form-control mt-1">
                             <option value="{{ $keyword }}">-- Pilih Tahun Pelajaran --</option>

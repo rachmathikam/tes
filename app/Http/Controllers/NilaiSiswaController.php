@@ -6,6 +6,7 @@ use App\Models\NilaiSiswa;
 use App\Models\NilaiHarian;
 use App\Models\TahunPelajaran;
 use App\Models\Kelas;
+use App\Models\KelasSiswa;
 use App\Models\Siswa;
 use Illuminate\Http\Request;
 
@@ -58,20 +59,20 @@ class NilaiSiswaController extends Controller
      */
     public function show($id)
     {
-
-        $tahun = TahunPelajaran::first();
-        // dd($tahun);
-        $siswas = Siswa::all();
+        $kelas = KelasSiswa::where('kelas_id',$id)->first();
+        // dd($kelas);
+        // $tahun = TahunPelajaran::first();
+        // $siswas = Siswa::all();
         $data = kelas::with('siswa','tahun_pelajaran')->where('id',$id)->get();
-        // dd($data);
-        $siswa = [];
-        foreach ($data as $kelas) {
-            foreach ($kelas->siswa as $item) {
-                array_push($siswa, $item);
+
+            $siswa = [];
+            foreach ($data as $kelas) {
+                foreach ($kelas->siswa as $item) {
+                    array_push($siswa, $item);
+                }
             }
-        }
         // dd($siswa);
-        return view('pages.nilai_siswa.show', compact('tahun','data','siswa','siswas'));
+        return view('pages.nilai_siswa.show', compact('data','siswa','kelas'));
     }
 
     /**

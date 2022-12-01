@@ -6,7 +6,7 @@
 @section('content')
 <div class="card shadow mb-4">
     <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Pilih Siswa</h6>
+        <h6 class="m-0 font-weight-bold text-primary">{{ $kelas->tahun_pelajaran->tahun_pelajarans }} / {{ $kelas->nama_kelas }}-{{ $kelas->kode_kelas }} / Pilih Siswa</h6>
     </div>
 
     <div class="card-body">
@@ -39,7 +39,7 @@
                         <td>{{ $datas->user->name }}</td>
                         <td>{{ $datas->jenis_kelamin }}</td>
                         <td class="text-center">
-                            <a href="{{ route('nilai_pts.show', $datas->id) }}">
+                            <a href="{{ route('nilai_pts.show', $kelas->id.':'.$datas->id) }}">
                                 <btn class="btn btn-xs btn-primary "><i class="fas fa-clipboard fa-sm"></i>
                                 </btn>
                             </a>
@@ -61,7 +61,7 @@
 <!-- Page level custom scripts -->
 <script src="{{ asset('admin/js/demo/datatables-demo.js') }}"></script>
 
-<script>
+{{-- <script>
 
 
 var rowCount = 0;
@@ -98,7 +98,7 @@ function calculateSubTotal () {
   $('#subtotal').val(subtotal.toFixed(2));
 }
 // Using a new index rather
-</script>
+</script> --}}
 @endsection
     <!-- DataTales Example -->
 

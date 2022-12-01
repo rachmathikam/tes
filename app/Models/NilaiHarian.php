@@ -9,6 +9,7 @@ class NilaiHarian extends Model
 {
     use HasFactory;
     protected $table = "nilai_harians";
+    protected $with = ['kelas_siswa'];
     protected $guarded = [];
 
     public function nilai_pts()

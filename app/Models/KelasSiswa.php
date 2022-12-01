@@ -10,6 +10,7 @@ class KelasSiswa extends Model
     use HasFactory;
 
     protected $table = 'kelas_siswas';
+    // protected $with = ['tahun_pelajarans'];
     protected $guarded = [];
 
 
@@ -21,7 +22,7 @@ class KelasSiswa extends Model
      */
     public function nilai_harian()
     {
-        return $this->belongsTo(Kelas::class,'id');
+        return $this->belongsTo(Kelas::class);
     }
 }
 

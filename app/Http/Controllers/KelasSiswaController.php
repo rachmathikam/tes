@@ -72,7 +72,7 @@ class KelasSiswaController extends Controller
                                 'siswa_id' => $input['siswa'][$i],
                             ]);
                         }else{
-                            return redirect()->route('kelas_siswa.show',$input['kelas_id'])->with('error',' Siswa sudah ada.');
+                            return redirect()->route('kelas_siswa.show',$input['kelas_id'])->with('error',' penambahan siswa sama.');
                         }
                     }else{
                         if ($input['siswa'][$i] != $input['siswa'][$i+1]) {

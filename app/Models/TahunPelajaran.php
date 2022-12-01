@@ -9,7 +9,12 @@ class TahunPelajaran extends Model
 {
     use HasFactory;
     protected $table = 'tahun_pelajarans';
+    protected $with = ['kelas'];
     protected $guarded = [];
 
 
+    public function kelas()
+    {
+        return $this->belongsTo(Kelas::class,'id');
+    }
 }
