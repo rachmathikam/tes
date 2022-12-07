@@ -8,6 +8,7 @@ use App\Models\TahunPelajaran;
 use App\Models\Kelas;
 use App\Models\KelasSiswa;
 use App\Models\Siswa;
+use App\Models\NilaiPTS;
 use Illuminate\Http\Request;
 
 class NilaiSiswaController extends Controller
@@ -20,12 +21,7 @@ class NilaiSiswaController extends Controller
     public function index(Request $request)
     {
         $keyword = $request->keyword;
-
-        // $kelas = KelasSiswa::with('kelas','siswa')->get();
-        // dd($kelas->toArray());
         $kelas = Kelas::where('tahun_pelajaran_id', 'LIKE', '%'.$keyword.'%')->get();
-
-        // dd($kelas);
         $tahun = TahunPelajaran::all();
         return view('pages.nilai_siswa.index',compact('tahun','keyword','kelas'));
     }
@@ -57,12 +53,9 @@ class NilaiSiswaController extends Controller
      * @param  \App\Models\NilaiSiswa  $nilaiSiswa
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request,$id)
     {
         $kelas = KelasSiswa::where('kelas_id',$id)->first();
-        // dd($kelas);
-        // $tahun = TahunPelajaran::first();
-        // $siswas = Siswa::all();
         $data = kelas::with('siswa','tahun_pelajaran')->where('id',$id)->get();
 
             $siswa = [];
@@ -71,8 +64,12 @@ class NilaiSiswaController extends Controller
                     array_push($siswa, $item);
                 }
             }
-        // dd($siswa);
-        return view('pages.nilai_siswa.show', compact('data','siswa','kelas'));
+
+            $keyword = $request->keyword;
+            $keyword = NilaiPTS::where('semester','LIKE', '%'.$keyword.'%')->get();
+            // dd($keyword);
+
+        return view('pages.nilai_siswa.show', compact('data','siswa','kelas','keyword'));
     }
 
     /**

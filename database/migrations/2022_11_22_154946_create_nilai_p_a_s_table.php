@@ -15,8 +15,10 @@ return new class extends Migration
     {
         Schema::create('nilai_p_a_s', function (Blueprint $table) {
             $table->id();
-            $table->string('nilai_harian_rata2')->nullable();
-            $table->string('UTS')->nullable();
+            $table->foreignId('nilai_harian_id')->references('id')->on('nilai_harians')->onDelete('cascade');
+            $table->enum('semester',['Ganjil','Genap']);
+            $table->string('nilai_uas');
+            $table->string('pensan_guru')->nullable();
             $table->timestamps();
         });
     }

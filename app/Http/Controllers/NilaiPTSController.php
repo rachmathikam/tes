@@ -8,6 +8,7 @@ use App\Models\Kelas;
 use App\Models\KelasSiswa;
 use App\Models\Siswa;
 use App\Models\TahunPelajaran;
+use App\Models\Mapel;
 use Illuminate\Http\Request;
 
 class NilaiPTSController extends Controller
@@ -40,6 +41,28 @@ class NilaiPTSController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'mapel' =>'required',
+            'nilai_h1' => 'required',
+            'nilai_h2' => 'required',
+            'nilai_h3' => 'required',
+            'nilai_h4' => 'required',
+            'pesan_guru'=>'required',
+        ]);
+        dd($request->toArray());
+        $input = $request->all();
+        // dd($data);
+        $nilai = [
+            $input['nilai_h1'],
+            $input['nilai_h2'],
+            $input['nilai_h3'],
+            $input['nilai_h4'],
+        ];
+            $data = array_sum($nilai)/count($nilai);
+
+            $tambah = NilaiPTS::create([
+
+            ]);
 
     }
 
@@ -57,13 +80,15 @@ class NilaiPTSController extends Controller
         // dd($kelas);
         $data = NilaiHarian::where('kelas_siswa_id', $kelas->id)->get();
 
+
         // dd($tahun);
+        $mapel = Mapel::all();
         $siswa = Siswa::where('id',$kelas->siswa_id)->first();
         $kelas = Kelas::where('id',$kelas->kelas_id)->first();
 
     // dd($data);
         // dd($data->toArray());
-        return view('pages.nilai_pts.show',compact('data','siswa','kelas'));
+        return view('pages.nilai_pts.show',compact('data','siswa','kelas','mapel'));
     }
 
     /**

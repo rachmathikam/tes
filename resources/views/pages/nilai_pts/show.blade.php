@@ -10,24 +10,87 @@
         </div>
         <div class="card-body">
             <div class="row mb-5">
-                <div class="col-md-6">
+                <div class="col-md-3">
 
-                    {{-- <form action="{{ route('kelas_siswa.index') }}" method="GET">
-                        <label for="status_payment">Filter By Tahun Pelajaran : </label>
+                    <form action="{{ route('nilai_pts.show',$kelas->id) }}" method="GET">
+                        <label for="status_payment">Filter By Semester : </label>
                         <select name="keyword" id="status_payment" class="form-control mt-1">
-                            <option value="{{ $keyword }}">-- Pilih Tahun Pelajaran --</option>
-                            @foreach ($tahun as $tahuns)
-                                <option value="{{ $tahuns->id }}">{{ $tahuns->tahun_pelajarans }}</option>
-                            @endforeach
+                            <option value="">-- Pilih Semester --</option>
+                            <option value="1">Ganjil</option>
+                            <option value="2">Genap</option>
+
+                            {{-- @foreach ($tahun as $tahuns)
+                            @endforeach --}}
                         </select>
                 </div>
                 <div class="col-md-3">
                     <button class="btn btn-primary" style="margin-top:35px;" type="submit"><i
                             class="fas fa-fw fa-search"></i></button></a>
                 </div>
-                </form> --}}
-
+                </form>
             </div>
+
+            <button type="button" class="btn btn-primary float-right ml-3" data-toggle="modal" data-target="#exampleModal">
+               Tambah Nilai
+          </button>
+          <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form action="{{ route('nilai_pts.store') }}" method="POST">
+                    @csrf
+                    <div class="form-group">
+                      <label for="recipient-name" class="col-form-label">Mata Pelajaran:</label>
+                        <select name="mapel" id="" class="custom-select">
+                            <option value="">-- Pilih Mata Pelajaran --</option>
+                            @foreach ($mapel as $mapels)
+                            <option value="{{ $mapels->id }}">{{ $mapels->mata_pelajaran }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                        <p id="physics">
+                          Nilai Harian:
+                          <input type="number" class="col-2 nilai" name="nilai_h1">
+                          <input type="number" class="col-2 nilai"  name="nilai_h2">
+                          <input type="number" class="col-2 nilai" name="nilai_h3">
+                          <input type="number" class="col-2 nilai" name="nilai_h4">
+                          <input id="physicsAverage" class="col-2" disabled>
+                        </p>
+                        <div class="hideen">
+                            <p id="history" hidden>
+                                History:
+                                <input type="number" hidden>
+                                <input type="number" hidden>
+                                <input type="number" hidden>
+                                <output id="historyAverage" hidden></output>
+                            </p>
+                        </div>
+                        <button type="button" class="btn btn-primary" id="calculator">lihat</button>
+
+                      <div class="form-group">
+                        <label for="exampleFormControlTextarea1">Pesan Guru</label>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="pesan_guru"></textarea>
+                      </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Tambah</button>
+                    </form>
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+            <button class="btn btn-success mb-3 float-right">+ Excel</button>
+
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
@@ -93,5 +156,38 @@
 
 <!-- Page level custom scripts -->
 <script src="{{ asset('admin/js/demo/datatables-demo.js') }}"></script>
+
+<script>
+ document.getElementById('calculator').addEventListener('click', function() {
+  var physicsTests = document.getElementById('physics').getElementsByClassName('nilai'),
+    historyTests = document.getElementById('history').getElementsByTagName('input'),
+    physicsTestsCount = 0,
+    historyTestsCount = 0,
+    physicsAverage = document.getElementById('physicsAverage'),
+    historyAverage = document.getElementById('historyAverage'),
+    i;
+  for (i = 0; i < physicsTests.length; i++) {
+    if (physicsTests[i].value) {
+      physicsTestsCount++;
+    }
+    if (!physicsTestsCount) {
+      physicsAverage.value = 'Silahkan Isi';
+    } else {
+      physicsAverage.value = (Number(physicsTests[0].value) + Number(physicsTests[1].value) + Number(physicsTests[2].value)
+      + Number(physicsTests[3].value)) / physicsTestsCount;
+    }
+  }
+  for (i = 0; i < historyTests.length; i++) {
+    if (historyTests[i].value) {
+      historyTestsCount++;
+    }
+    if (!historyTestsCount) {
+      historyAverage.value = 'No assessment made!';
+    } else {
+      historyAverage.value = (Number(historyTests[0].value) + Number(historyTests[1].value) + Number(historyTests[2].value)) / historyTestsCount;
+    }
+  }
+});
+</script>
 @endsection
 <!-- DataTales Example -->

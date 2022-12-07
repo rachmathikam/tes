@@ -11,7 +11,8 @@
 
     <div class="card-body">
         @if(Auth::user()->role_id == '1')
-        <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#exampleModal">
+        {{-- multi input modal --}}
+        {{-- <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#exampleModal">
             Tambah Kelas Siswa
           </button>
 
@@ -56,7 +57,45 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div> --}}
+        {{-- end multi input modal --}}
+
+        <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#exampleModal">
+    Tambah Siswa
+  </button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Tambah Siswa</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form action="{{ route('kelas_siswa.store') }}" method="POST">
+                @csrf
+                @method('POST')
+                <input type="hidden" class="form-control" name="kelas_id" value="{{ $data->id }}">
+                <label for="">Pilih Siswa</label>
+                <select class="form-control" name="siswa">
+                    <option value="">-- Pilih Siswa --</option>
+                    @foreach ($siswas as $data)
+                    <option value="{{$data->id}}">{{ $data->user->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">Simpan</button>
+            </form>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
+        </div>
+      </div>
+    </div>
+  </div>
         @endif()
         <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">

@@ -10,6 +10,31 @@
     </div>
     <div class="card-body">
         <a href="{{ route('siswa.create') }}"><button class="btn btn-primary mb-2">Tambah Siswa</button></a>
+        <!-- Button trigger modal -->
+<button type="button" class="btn btn-success mb-2" data-toggle="modal" data-target="#exampleModal">
+   + Excel
+  </button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Import Siswa dengan Excel</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+        <input type="file" name="file" value="upload">
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary">Simpan</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
+        </div>
+      </div>
+    </div>
+  </div>
         <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>

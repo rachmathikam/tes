@@ -63,34 +63,41 @@ class KelasSiswaController extends Controller
                 return redirect()->route('kelas_siswa.show',$input['kelas_id'])->with('error',' Siswa sudah ada.');
             }
 
-            for($i = 0; $i < count($input['siswa']); $i++){
-                if (count($input['siswa']) > 1) {
-                    if (count($input['siswa']) - 1 == $i) {
-                        if ($input['siswa'][$i] != $input['siswa'][$i-1]) {
-                            KelasSiswa::create([
-                                'kelas_id' => $input['kelas_id'],
-                                'siswa_id' => $input['siswa'][$i],
-                            ]);
-                        }else{
-                            return redirect()->route('kelas_siswa.show',$input['kelas_id'])->with('error',' penambahan siswa sama.');
-                        }
-                    }else{
-                        if ($input['siswa'][$i] != $input['siswa'][$i+1]) {
-                            KelasSiswa::create([
-                                'kelas_id' => $input['kelas_id'],
-                                'siswa_id' => $input['siswa'][$i],
-                            ]);
-                        }else{
-                            return redirect()->route('kelas_siswa.show',$input['kelas_id'])->with('error',' Siswa sudah ada.');
-                        }
-                    }
-                }else{
-                    KelasSiswa::create([
-                        'kelas_id' => $input['kelas_id'],
-                        'siswa_id' => $input['siswa'][$i],
-                    ]);
-                }
-            }
+            KelasSiswa::create([
+                            'kelas_id' => $input['kelas_id'],
+                            'siswa_id' => $input['siswa'],
+                        ]);
+
+
+                // multiple inputs controller
+            // for($i = 0; $i < count($input['siswa']); $i++){
+            //     if (count($input['siswa']) > 1) {
+            //         if (count($input['siswa']) - 1 == $i) {
+            //             if ($input['siswa'][$i] != $input['siswa'][$i-1]) {
+            //                 KelasSiswa::create([
+            //                     'kelas_id' => $input['kelas_id'],
+            //                     'siswa_id' => $input['siswa'][$i],
+            //                 ]);
+            //             }else{
+            //                 return redirect()->route('kelas_siswa.show',$input['kelas_id'])->with('error',' penambahan siswa sama.');
+            //             }
+            //         }else{
+            //             if ($input['siswa'][$i] != $input['siswa'][$i+1]) {
+            //                 KelasSiswa::create([
+            //                     'kelas_id' => $input['kelas_id'],
+            //                     'siswa_id' => $input['siswa'][$i],
+            //                 ]);
+            //             }else{
+            //                 return redirect()->route('kelas_siswa.show',$input['kelas_id'])->with('error',' Siswa sudah ada.');
+            //             }
+            //         }
+            //     }else{
+            //         KelasSiswa::create([
+            //             'kelas_id' => $input['kelas_id'],
+            //             'siswa_id' => $input['siswa'][$i],
+            //         ]);
+            //     }
+            // }
 
 
             return redirect()->route('kelas_siswa.show',$request['kelas_id'])->with('success','siswa berhasil di tambahkan');
