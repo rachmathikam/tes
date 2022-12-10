@@ -10,6 +10,7 @@ use App\Models\Siswa;
 use App\Models\TahunPelajaran;
 use App\Models\Mapel;
 use Illuminate\Http\Request;
+use DB;
 
 class NilaiPTSController extends Controller
 {
@@ -42,27 +43,58 @@ class NilaiPTSController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'kelas_id' => 'nullable',
+            'siswa_id' => 'nullable',
             'mapel' =>'required',
+            'semester' => 'required',
+            'aspek' => 'required',
             'nilai_h1' => 'required',
             'nilai_h2' => 'required',
             'nilai_h3' => 'required',
             'nilai_h4' => 'required',
+            'nilai_rata2' => 'required',
             'pesan_guru'=>'required',
         ]);
-        dd($request->toArray());
         $input = $request->all();
-        // dd($data);
         $nilai = [
             $input['nilai_h1'],
             $input['nilai_h2'],
             $input['nilai_h3'],
             $input['nilai_h4'],
         ];
-            $data = array_sum($nilai)/count($nilai);
+            $rataRata = array_sum($nilai)/count($nilai);
 
-            $tambah = NilaiPTS::create([
+            $kelas_siswa = KelasSiswa::where('kelas_id',$input['kelas_id'])->where('siswa_id',$input['siswa_id'])->first();
 
-            ]);
+            DB::beginTransaction();
+            try {
+                $harian = NilaiHarian::create([
+                            'kelas_siswa_id' => $kelas_siswa->id,
+                            'mapels_id' => $input['mapel'],
+                            'aspek'    => $input['aspek'],
+                            'nilai_n1' => $input['nilai_h1'],
+                            'nilai_n2' => $input['nilai_h2'],
+                            'nilai_n3' => $input['nilai_h3'],
+                            'nilai_n4' => $input['nilai_h4'],
+                            'nilai_rata2' => $rataRata,
+                        ]);
+
+                $pts = NilaiPTS::create([
+                            'nilai_harian_id' => $harian->id,
+                            'semester'  => $input['semester'],
+                            'nilai_pts' => $input['nilai_pts'],
+                            'pensan_guru' => $input['pesan_guru'],
+                        ]);
+             //    dd($guru);
+                DB::commit();
+
+                return redirect()->route('nilai_pts.show',$input['kelas_id'].':'.$input['siswa_id'])->with('success', 'Data');
+
+            } catch (\Exceptions $exception) {
+                DB::rollback();
+
+                return redirect()->route('nilai_pts.show', $input['kelas_id'].':'.$input['siswa_id'])->with('failed', 'failed');
+            }
 
     }
 
@@ -72,23 +104,28 @@ class NilaiPTSController extends Controller
      * @param  \App\Models\NilaiPTS  $nilaiPTS
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request ,$id)
     {
-        $data = explode(':', $id);
 
+        $data = explode(':', $id);
+// dd($data);
         $kelas = KelasSiswa::where('kelas_id',$data[0])->where('siswa_id', $data[1])->first();
         // dd($kelas);
-        $data = NilaiHarian::where('kelas_siswa_id', $kelas->id)->get();
+        $keyword = $request->keyword ;
+        $nilai = NilaiHarian::join('nilai_p_t_s','nilai_harians.id', '=', 'nilai_p_t_s.nilai_harian_id')->where('kelas_siswa_id', $kelas->id)->where('semester','LIKE', '%'.$keyword.'%')->get();
+        // dd($nilai);
 
 
-        // dd($tahun);
+// dd($data->toArray());
+
+
         $mapel = Mapel::all();
         $siswa = Siswa::where('id',$kelas->siswa_id)->first();
         $kelas = Kelas::where('id',$kelas->kelas_id)->first();
 
     // dd($data);
         // dd($data->toArray());
-        return view('pages.nilai_pts.show',compact('data','siswa','kelas','mapel'));
+        return view('pages.nilai_pts.show',compact('nilai','data','siswa','kelas','mapel','keyword','id'));
     }
 
     /**
@@ -120,8 +157,8 @@ class NilaiPTSController extends Controller
      * @param  \App\Models\NilaiPTS  $nilaiPTS
      * @return \Illuminate\Http\Response
      */
-    public function destroy(NilaiPTS $nilaiPTS)
+    public function destroy($id)
     {
-        //
+
     }
 }

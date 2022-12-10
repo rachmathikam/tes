@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('nilai_harian_id')->references('id')->on('nilai_harians')->onDelete('cascade');
             $table->enum('semester',['Ganjil','Genap']);
-            $table->string('nilai_pts');
+            $table->string('nilai_pts')->nullable();
             $table->string('pensan_guru')->nullable();
             $table->timestamps();
         });

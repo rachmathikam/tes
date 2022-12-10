@@ -39,39 +39,10 @@
                         <td>{{ $datas->user->name }}</td>
                         <td>{{ $datas->jenis_kelamin }}</td>
                         <td class="text-center">
-                            {{-- <a href="{{ route('nilai_pts.show', $kelas->id.':'.$datas->id) }}">
+                            <a href="{{ route('nilai_pts.show', $kelas->id.':'.$datas->id) }}">
                                 <btn class="btn btn-xs btn-primary "><i class="fas fa-clipboard fa-sm"></i>
                                 </btn>
-                            </a> --}}
-
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                                    <i class="fas fa-calendar"></i>
-                              </button>
-                              <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                  <div class="modal-content">
-                                    <div class="modal-header">
-                                      <h5 class="modal-title" id="exampleModalLabel">Pilih Semester</h5>
-                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                      </button>
-                                    </div>
-                                    <div class="modal-body">
-                                     <form action="{{ route('nilai_pts.show',$kelas->id.':'.$datas->id) }}">
-                                        <select name="keyword" id="" class="form-control">
-                                            <label for="{{ $keyword }}">Pilih Semester</label>
-                                            <option value="1">Ganjil</option>
-                                            <option value="2">Genap</option>
-                                        </select>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="submit" class="btn btn-primary">Cari</button>
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
-                                    </form>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
+                            </a>
                         </td>
                     </tr>
                     @endforeach

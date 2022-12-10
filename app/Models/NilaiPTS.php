@@ -15,7 +15,7 @@ class NilaiPTS extends Model
 
     public function nilai_harian()
     {
-        return $this->belongsTo(NilaiHarian::class,'id');
+        return $this->belongsTo(NilaiHarian::class);
     }
 
 }
