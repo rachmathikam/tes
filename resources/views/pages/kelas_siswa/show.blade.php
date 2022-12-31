@@ -6,7 +6,7 @@
 @section('content')
 <div class="card shadow mb-4">
     <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Data Kelas Siswa</h6>
+      <h6 class="m-0 font-weight-bold text-primary">Data Kelas {{ $data->nama_kelas }} - {{ $data->kode_kelas }}</h6>
     </div>
 
     <div class="card-body">
@@ -102,6 +102,7 @@
                 <thead>
                     <tr class="text-center">
                         <th>NO</th>
+                        <th>NIS</th>
                         <th>Nama</th>
                         <th>Jenis Kelamin</th>
 
@@ -111,6 +112,7 @@
                 <tfoot>
                     <tr class="text-center">
                         <th>NO</th>
+                        <th>NIS</th>
                         <th>Nama</th>
                         <th>Jenis Kelamin</th>
 
@@ -121,6 +123,7 @@
                     @foreach ($siswa as $datas)
                     <tr class="text-center">
                         <td>{{ $loop->iteration }}</td>
+                        <td>{{ $datas->NIS }}</td>
                         <td>{{ $datas->user->name }}</td>
                         <td>{{ $datas->jenis_kelamin }}</td>
                     </tr>

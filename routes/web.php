@@ -3,7 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{SiswaController, MapelController,
     KelasController,TahunPelajaranController,NilaiHarianController, DetailKelasController, NilaiController
-, KelasSiswaController, NilaiPTSController, NilaiSiswaController};
+, KelasSiswaController, NilaiPTSController, NilaiSiswaController,NilaiPASController,GuruController};
+use App\Imports\UsersImport;
+use Maatwebsite\Excel\Facades\Excel;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -35,9 +37,12 @@ Route::group(['middleware' => 'admin'], function () {
     Route::resource('/kelas_siswa', KelasSiswaController::class);
     Route::resource('/nilai_pts', NilaiPTSController::class);
     Route::resource('/nilai_siswa', NilaiSiswaController::class);
-
-
+    Route::post('/nilai_siswa/tambahStore', [NilaiSiswaController::class,'tambahStore']);
+    Route::resource('/nilai_pas', NilaiPASController::class);
+    Route::resource('/guru', GuruController::class);
+    Route::post('/siswa', [SiswaController::class, 'import'])->name('import');
 });
+
 
 
 

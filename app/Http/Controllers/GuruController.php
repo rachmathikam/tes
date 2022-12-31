@@ -96,40 +96,40 @@ class GuruController extends Controller
        }
 
 
-       DB::beginTransaction();
-       try {
-          User::create([
-                'name' => $input['name'],
-                'email' => $input['email'],
-                'password' => bcrypt($input['password']),
-                'role_id' => 2,
-            ]);
-        //    dd($user);
-           $userid = User::get()->last();
-        //    dd($userid);
-           Guru::create(
-               [
-                   'NIP'  => $input['NIP'],
-                   'tempat_lahir' => $input['tempat_lahir'],
-                   'tanggal_lahir' => $input['tanggal_lahir'],
-                   'jenis_kelamin' => $input['jenis_kelamin'],
-                   'alamat' => $input['alamat'],
-                   'no_telp' => $input['no_telp'],
-                   'user_id' => $userid->id,
-                   'mapels_id' => $input['mapels_id'],
-                   'image' => $input['image'],
-               ]
-           );
-        //    dd($guru);
-           DB::commit();
+                DB::beginTransaction();
+                try {
+                    User::create([
+                            'name' => $input['name'],
+                            'email' => $input['email'],
+                            'password' => bcrypt($input['password']),
+                            'role_id' => 2,
+                        ]);
+                    //    dd($user);
+                    $userid = User::get()->last();
+                    //    dd($userid);
+                    Guru::create(
+                        [
+                            'NIP'  => $input['NIP'],
+                            'tempat_lahir' => $input['tempat_lahir'],
+                            'tanggal_lahir' => $input['tanggal_lahir'],
+                            'jenis_kelamin' => $input['jenis_kelamin'],
+                            'alamat' => $input['alamat'],
+                            'no_telp' => $input['no_telp'],
+                            'user_id' => $userid->id,
+                            'mapels_id' => $input['mapels_id'],
+                            'image' => $input['image'],
+                        ]
+                    );
+                    //    dd($guru);
+                    DB::commit();
 
-           return redirect()->route('guru.index')->with('success', 'Data');
+                    return redirect()->route('guru.index')->with('success', 'Data');
 
-       } catch (\Exceptions $exception) {
-           DB::rollback();
+                } catch (\Exceptions $exception) {
+                    DB::rollback();
 
-           return redirect()->route('guru.create')->with('failed', 'failed');
-       }
+                    return redirect()->route('guru.create')->with('failed', 'failed');
+                }
 
     }
 
@@ -183,8 +183,6 @@ class GuruController extends Controller
             'jenis_kelamin' => 'required',
         ]);
         $input = $request->all();
-        // dd($input);
-            $input['password'] = Hash::make($request->password);
 
         if ($request->file('image')) {
             $file = $request->file('image');

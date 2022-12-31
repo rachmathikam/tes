@@ -56,6 +56,21 @@ class NilaiPTSController extends Controller
             'pesan_guru'=>'required',
         ]);
         $input = $request->all();
+        $check = NilaiHarian::join('kelas_siswas','kelas_siswas.id','nilai_harians.kelas_siswa_id')
+                            ->join('mapels','mapels.id', '=', 'nilai_harians.mapels_id')
+                            ->join('nilai_p_t_s','nilai_harians.id', '=', 'nilai_p_t_s.nilai_harian_id')
+                            ->where('kelas_id',$input['kelas_id'])
+                            ->where('siswa_id',$input['siswa_id'])
+                            ->where('aspek', $input['aspek'])
+                            ->where('semester',$input['semester'])
+                            ->where('mapels_id',$input['mapel'])
+                            ->count();
+
+        if($check > 0){
+            return redirect()->route('nilai_pts.show',$input['kelas_id'].':'.$input['siswa_id'])->with('error','nilai asepk dengan mapel dan semester ini telah ada');
+        }
+        //    dd($check > false);
+
         $nilai = [
             $input['nilai_h1'],
             $input['nilai_h2'],
@@ -88,12 +103,12 @@ class NilaiPTSController extends Controller
              //    dd($guru);
                 DB::commit();
 
-                return redirect()->route('nilai_pts.show',$input['kelas_id'].':'.$input['siswa_id'])->with('success', 'Data');
+                return redirect()->route('nilai_pts.show',$input['kelas_id'].':'.$input['siswa_id'])->with('success', 'berhasil menambahkan nilai');
 
             } catch (\Exceptions $exception) {
                 DB::rollback();
 
-                return redirect()->route('nilai_pts.show', $input['kelas_id'].':'.$input['siswa_id'])->with('failed', 'failed');
+                return redirect()->route('nilai_pts.show', $input['kelas_id'].':'.$input['siswa_id'])->with('failed', 'gagal menambahkan nilai');
             }
 
     }
@@ -146,9 +161,63 @@ class NilaiPTSController extends Controller
      * @param  \App\Models\NilaiPTS  $nilaiPTS
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, NilaiPTS $nilaiPTS)
+    public function update(Request $request,$id)
     {
-        //
+    //   dd($request->all());
+
+      $request->validate([
+        'kelas_id' => 'nullable',
+        'siswa_id' => 'nullable',
+        'mapel' =>'required',
+        'semester' => 'required',
+        'aspek' => 'required',
+        'nilai_h1' => 'required',
+        'nilai_h2' => 'required',
+        'nilai_h3' => 'required',
+        'nilai_h4' => 'required',
+        'nilai_rata2' => 'required',
+        'pesan_guru'=>'required',
+      ]);
+
+      $input = $request->all();
+      $nilai = [
+        $input['nilai_h1'],
+        $input['nilai_h2'],
+        $input['nilai_h3'],
+        $input['nilai_h4'],
+    ];
+        $rataRata = array_sum($nilai)/count($nilai);
+
+      $kelas_siswa = KelasSiswa::where('kelas_id',$input['kelas_id'])->where('siswa_id',$input['siswa_id'])->first();
+
+      $nilai_harian = NilaiHarian::first();
+    //   dd($nilai_harian);
+      $nilai_pts = NilaiPTS::first();
+    //   dd($nilai_harian);
+
+        $nilai_harian->update([
+            'kelas_siswa_id' => $kelas_siswa->id,
+            'mapels_id'=> $input['mapel'],
+            'aspek'    => $input['aspek'],
+            'nilai_n1' => $input['nilai_h1'],
+            'nilai_n2' => $input['nilai_h2'],
+            'nilai_n3' => $input['nilai_h3'],
+            'nilai_n4' => $input['nilai_h4'],
+            'nilai_rata2' =>  $rataRata,
+        ]);
+
+        $nilai_pts->update([
+            'nilai_harian_id' => $nilai_harian->id,
+            'semester' => $input['semester'],
+            'nilai_pts' => $input['nilai_pts'],
+            'pensan_guru' => $input['pesan_guru'],
+        ]);
+
+        if($nilai_pts){
+            return redirect()->route('nilai_pts.show',$id)->with('success','Data berhasil di update');
+        }else{
+            return redirect()->route('nilai_pts.show',$id)->with('error','Data gagal di update');
+        }
     }
 
     /**
@@ -160,5 +229,17 @@ class NilaiPTSController extends Controller
     public function destroy($id)
     {
 
+        $nilai_harian = NilaiHarian::with('nilai_pts')->first();
+        // dd($nilai_harian);
+        $nilai = $nilai_harian->delete();
+
+
+
+
+        if($nilai){
+                return redirect()->route('nilai_pts.show',$id)->with('success','data berhasil di hapus');
+        }else{
+            return redirect()->route('nilai_pts.show',$id)->with('error','data gagal di hapus');
+        }
     }
 }

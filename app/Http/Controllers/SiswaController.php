@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Siswa;
 use App\Models\User;
 use App\Models\Kelas;
-
+use App\Imports\SiswaImport;
+use Maatwebsite\Excel\Facades\Excel;
 use Hash;
 use Illuminate\Http\Request;
 use DB;
@@ -28,6 +29,13 @@ class SiswaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function import(Request $request){
+        Excel::import(new SiswaImport,
+                      $request->file('file')->store('files'));
+        return redirect()->route('siswa.index')->with('success','data import excel berhasil');
+    }
+
+
     public function create()
     {
         $kelas = Kelas::all();

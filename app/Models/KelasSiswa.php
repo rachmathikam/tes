@@ -22,19 +22,24 @@ class KelasSiswa extends Model
      */
     public function nilai_harian()
     {
-        return $this->belongsTo(Kelas::class);
+        return $this->belongsTo(NilaiHarian::class);
     }
-}
+// }
 
 //      /**
 //      * Get the user that owns the KelasSiswa
 //      *
 //      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
 //      */
-//     public function siswa()
-//     {
-//         return $this->belongsTo(Siswa::class, 'siswa_id', 'id');
-//     }
-// }
+    public function siswa()
+    {
+        return $this->belongsTo(Siswa::class, 'siswa_id', 'id');
+    }
+
+    public function kelas()
+    {
+        return $this->belongsTo(Kelas::class, 'kelas_id', 'id');
+    }
+}
 
 

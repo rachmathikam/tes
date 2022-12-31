@@ -49,7 +49,7 @@
                   </button>
                 </div>
                 <div class="modal-body">
-                  <form action="{{ route('nilai_pts.store') }}" method="POST">
+                  <form action="{{ route('nilai_pas.store') }}" method="POST">
                     @csrf
                     <div class="form-group">
                       <label for="recipient-name" class="col-form-label">Mata Pelajaran:</label>
@@ -85,8 +85,8 @@
                           <input type="number" class="col-2 nilai" name="nilai_h4">
                           <input id="nilai_rata2" class="col-2" readonly name="nilai_rata2">
                         </p>
-                        <label for="">Nilai PTS: &nbsp;&nbsp;&nbsp;</label>
-                        <input type="number" class="col-2" name="nilai_pts">
+                        <label for="">Nilai PAS: &nbsp;&nbsp;&nbsp;</label>
+                        <input type="number" class="col-2" name="nilai_pas">
 
 
 
@@ -166,7 +166,7 @@
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $datas->mapel->mata_pelajaran }} </td>
                                 <td>{{ $datas->nilai_rata2 }}</td>
-                                <td>{{ $datas->nilai_pts }}</td>
+                                <td>{{ $datas->nilai_uas }}</td>
                                 <td>{{ $datas->aspek }}</td>
                                 <td>{{ $datas->pensan_guru }}</td>
                                 <td>{{ $datas->semester }}</td>
@@ -180,7 +180,7 @@
 
                                     <td class="text-center">
                                       <form onsubmit="return confirm('Apakah Anda Yakin ?');"
-                                      action="{{ route('nilai_pts.destroy', $id) }}" method="POST">
+                                      action="{{ route('nilai_pas.destroy', $id) }}" method="POST">
                                       <button type="button" class="btn btn-warning" id="edit" data-toggle="modal"
                                          data-mapel="{{ $datas->mapels_id }}"
                                          data-mapel1="{{ $datas->mapel->mata_pelajaran }}"

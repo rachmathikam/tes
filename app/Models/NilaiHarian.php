@@ -17,6 +17,11 @@ class NilaiHarian extends Model
         return $this->belongsTo(NilaiPTS::class,'id');
     }
 
+    public function nilai_pas()
+    {
+        return $this->belongsTo(NilaiPAS::class, 'id');
+    }
+
     public function mapel()
     {
         return $this->belongsTo(Mapel::class, 'mapels_id','id');

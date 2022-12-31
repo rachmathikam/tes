@@ -21,7 +21,6 @@ return new class extends Migration
             $table->date('tanggal_lahir');
             $table->enum('jenis_kelamin',['laki-laki','perempuan']);
             $table->string('alamat');
-            $table->boolean('status')->default(false);
             $table->string('image')->nullable();
             $table->timestamps();
         });

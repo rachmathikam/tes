@@ -17,10 +17,10 @@ return new class extends Migration
             $table->id();
             $table->foreignId('nilai_harian_id')->references('id')->on('nilai_harians')->onDelete('cascade');
             $table->enum('semester',['Ganjil','Genap']);
-            $table->string('nilai_uas');
+            $table->string('nilai_uas')->nullable();
             $table->string('pensan_guru')->nullable();
             $table->timestamps();
-        });
+    });
     }
 
     /**

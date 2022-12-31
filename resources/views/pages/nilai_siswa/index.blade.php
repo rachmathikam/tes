@@ -9,9 +9,8 @@
             <h6 class="m-0 font-weight-bold text-primary">Pilih Kelas</h6>
         </div>
         <div class="card-body">
-            <div class="row mb-5">
-                <div class="col-md-6">
-
+            <div class="row mb-3">
+                <div class="col-md-4">
                     <form action="{{ route('nilai_siswa.index') }}" method="GET">
                         <label for="status_payment">Filter By Tahun Pelajaran : </label>
                         <select name="keyword" id="status_payment" class="form-control mt-1">
@@ -26,8 +25,53 @@
                             class="fas fa-fw fa-search"></i></button></a>
                 </div>
                 </form>
-
             </div>
+            <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#exampleModal">
+    Tambah Kelas
+  </button>
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Tambah Kelas</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form action="{{ route('nilai_siswa.store') }}" method="POST">
+                @method('POST')
+                @csrf
+          <div class="row">
+            <label for="">Tahun Pelajaran</label>
+                <select name="tahun_pelajaran_id" id="status_payment" class="form-control mt-1">
+                    <option value="">-- Pilih Tahun Pelajaran --</option>
+                    @foreach ($tahun as $tahuns)
+                        <option value="{{ $tahuns->id }}">{{ $tahuns->tahun_pelajarans }}</option>
+                    @endforeach
+                </select>
+            <div class="form-group mt-3 ">
+                <label for="exampleInputPassword1">Nama Kelas</label>
+                <input type="text" class="form-control"  placeholder="Nama Kelas" name="nama_kelas">
+              </div>
+              <div class="form-group mt-3 ml-3">
+                <label for="exampleInputPassword1">Kode Kelas</label>
+                <input type="text" class="form-control"  placeholder="Kode Kelas" name="kode_kelas">
+              </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">Tambah Kelas</button>
+        </form>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>

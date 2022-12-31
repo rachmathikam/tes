@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('kelas_siswas', function (Blueprint $table) {
             $table->id();
+            $table->enum('status',['Proses belajar','Naik Kelas','Tetap Kelas']);
             $table->unsignedBigInteger('kelas_id');
             $table->unsignedBigInteger('siswa_id');
             $table->foreign('kelas_id')->references('id')->on('kelas')

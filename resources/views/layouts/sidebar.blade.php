@@ -38,12 +38,8 @@
     <div class="bg-white py-2 collapse-inner rounded">
         <h6 class="collapse-header">Users:</h6>
         <a class="collapse-item" href="{{ route('siswa.index') }}">Siswa</a>
+        <a class="collapse-item" href="{{ route('guru.index') }}">Wali Kelas</a>
     </div>
-    <li class="nav-item">
-        <a class="nav-link" href="{{ route('mapel.index') }}">
-            <i class="fas fa-fw fa-bookmark"></i>
-            <span>Mata Pelajaran</span></a>
-    </li>
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
             aria-expanded="true" aria-controls="collapseTwo">
@@ -52,14 +48,15 @@
         </a>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="{{ route('kelas.index') }}">Kelas Mapel</a>
-                <a class="collapse-item" href="{{ route('detailkelas.create') }}"> Tambah Kelas Mapel</a>
-                <a class="collapse-item" href="{{ route('kelas_siswa.index') }}"> Kelas Siswa</a>
+                {{-- <a class="collapse-item" href="{{ route('kelas.index') }}">Kelas Mapel</a>
+                <a class="collapse-item" href="{{ route('detailkelas.create') }}"> Tambah Kelas Mapel</a> --}}
+                <a class="collapse-item" href="{{ route('mapel.index') }}">Mata Pelajaran</a>
+                <a class="collapse-item" href="{{ route('kelas.index') }}">Kelas</a>
                 <a class="collapse-item" href="{{ route('tahunpelajaran.index') }}"> Tahun Periodik</a>
             </div>
         </div>
     </li>
-    <li class="nav-item">
+    {{-- <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
             aria-expanded="true" aria-controls="collapsePages">
             <i class="fas fa-fw fa-clipboard"></i>
@@ -73,7 +70,7 @@
                 <a class="collapse-item" href="blank.html">Penilaian PAS</a>
             </div>
         </div>
-</li>
+</li> --}}
 @endif
 @if(Auth::user()->role_id == '2')
 

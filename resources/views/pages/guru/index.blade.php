@@ -48,11 +48,11 @@
                         </td>
                         <td class="text-center">
 
-                            <form onsubmit="return confirm('Apakah Anda Yakin ?');"
-                            action="{{ route('guru.destroy', $gurus->id) }}" method="POST">
+                                <form onsubmit="return confirm('Apakah Anda Yakin ?');"
+                                action="{{ route('guru.destroy', $gurus->id) }}" method="POST">
                             @csrf
                             <a href="{{ route('guru.show', $gurus->id) }}"><btn class="btn btn-xs btn-primary "><i class="fas fa-eye fa-md"></i></btn></a>
-                            <a href="{{ route('guru.edit',$gurus->id) }}"><btn class="btn btn-xs btn-warning"><i class="fas fa-edit fa-md"></i></btn></a>
+                            <a href="{{ route('guru.edit',$gurus->id) }}"><btn class="btn btn-xs btn-warning" type =><i class="fas fa-edit fa-md"></i></btn></a>
 
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger btn-xs"><i

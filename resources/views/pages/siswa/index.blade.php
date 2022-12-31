@@ -1,3 +1,4 @@
+
 @section('css')
 <link href="{{ asset('admin/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
 @endsection
@@ -25,11 +26,14 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
+        <form action="{{ route('import') }}" method="POST" enctype="multipart/form-data">
+            @csrf
         <div class="modal-body">
         <input type="file" name="file" value="upload">
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-primary">Simpan</button>
+            <button type="submit" class="btn btn-primary">Simpan</button>
+        </form>
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
         </div>
       </div>

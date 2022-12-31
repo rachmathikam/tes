@@ -19,11 +19,9 @@ class GuruMiddleware
     public function handle(Request $request, Closure $next)
     {
         if(Auth::user()->role_id == '2'){
-
             return $next($request);
         }else{
-
-         return redirect('/home');
+            return redirect('/home');
         }
     }
 }

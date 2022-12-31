@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Kelas;
+use App\Models\KelasSiswa;
+use App\Models\TahunPelajaran;
 use App\Models\CodeKelas;
-use App\Models\KelasMapel;
+use App\Models\Siswa;
 use Illuminate\Http\Request;
 
 class KelasController extends Controller
@@ -14,10 +16,21 @@ class KelasController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $kelas = Kelas::all();
-        return view('pages.kelas.index',compact('kelas'));
+
+        $keyword = $request->keyword;
+        $tambah_kelas = Kelas::all();
+        $kelas = Kelas::where('tahun_pelajaran_id', 'LIKE', '%'.$keyword.'%')
+            ->orderBy('tahun_pelajaran_id','desc')
+            ->orderByRaw("FIELD(nama_kelas , 'VII', 'VIII','IX') asc")
+            ->orderBy('kode_kelas','asc')
+            ->get();
+            // dd($kelas);
+
+
+        $tahun = TahunPelajaran::all();
+        return view('pages.kelas.index',compact('tahun','keyword','kelas','tambah_kelas'));
     }
 
     /**
@@ -40,19 +53,31 @@ class KelasController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'romawi' =>'required',
-            'code_kelas' =>'required',
-        ]);
-        // dd($request);
+            'tahun_pelajaran_id' => 'required',
+            'nama_kelas' =>'required',
+            'kode_kelas' =>'required',
+        ],
+        [
+            'tahun_pelajaran.required' => 'silahkan pilih tahun pelajaran',
+            'nama_kelas.required' => 'silahkan isi nama kelas',
+            'kode_kelas.required' => 'silahkan isi kode kelas',
+
+        ]
+    );
+        // dd($request->toArray());
         $input = $request->all();
 
-        $check = Kelas::where('romawi',$input['romawi'])->where('code_kelas',$input['code_kelas'])->count();
+        $check = Kelas::where('tahun_pelajaran_id',$input['tahun_pelajaran_id'])->where('nama_kelas',$input['nama_kelas'])->where('kode_kelas',$input['kode_kelas'])->count();
         if($check > 0){
-            return redirect()->route('kelas.create')->with('error','inisisal Romawi '.$input['romawi'].'/'.$input['code_kelas'].' sudah ada');
+            return redirect()->route('kelas.index')->with('error','inisisal nama kelas '.$input['nama_kelas'].'/'.$input['kode_kelas'].' sudah ada');
         }
         $data = Kelas::create($input);
         $data->save();
-        return redirect()->route('kelas.index')->with('success', 'Kelas has been deleted');
+        if($data){
+            return redirect()->route('kelas.index')->with('success', 'Kelas berhasil di tambahkan');
+        }else{
+            return redirect()->route('kelas.index')->with('error', 'Kelas gagal ditambahkan');
+        }
 
     }
 
@@ -137,3 +162,4 @@ class KelasController extends Controller
         }
     }
 }
+

@@ -117,6 +117,7 @@ class KelasSiswaController extends Controller
         // dd($tahun);
         $siswas = Siswa::all();
         $data = kelas::with('siswa')->where('id',$id)->first();
+
         // dd($data);
         $siswa = [];
         foreach ($data->siswa as $item) {
