@@ -89,7 +89,7 @@ class NilaiSiswaController extends Controller
         // dd($id);
         $pilih_kelas = Kelas::all();
         $kelas = KelasSiswa::join('kelas','kelas.id', '=', 'kelas_siswas.kelas_id')
-                        ->where('kelas_id',$id)->first();
+                            ->where('kelas_id',$id)->first();
         $datas = Kelas::where('id',$id)->first();
         // dd($datas);
 
